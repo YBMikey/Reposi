@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboMasters - UTA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            background-image: url("https://innowings.engg.hku.hk/content/uploads/2021/07/robomaster-1-Kenneth-Wong-scaled.jpg");
+            background-size: cover;
+            background-attachment: fixed; /* Parallax effect */
+            background-position: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin: 0;
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        header p {
+            font-size: 1.5em;
+            margin: 10px 0 0;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #003366;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 2px -2px gray;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+            transform: scale(1.1); /* Subtle hover effect */
+        }
+
+        section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        section:nth-child(even) {
+            background-color: #f4f7f6;
+        }
+
+        section:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            color: #001f3f;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .about p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .projects,
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .project,
+        .team-member {
+            width: 300px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project:hover,
+        .team-member:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project img,
+        .team-member img {
+            width: 100%;
+            height: auto;
+            border-bottom: 5px solid #003366;
+        }
+
+        .project h3,
+        .team-member h3 {
+            margin: 15px;
+            color: #001f3f;
+        }
+
+        .project p,
+        .team-member p {
+            margin: 15px;
+            color: #666;
+        }
+
+        /* Carousel for project images */
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 100%;
+            transition: transform 1s ease;
+        }
+
+        .carousel:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+            z-index: 1;
+        }
+
+        .events table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .events th,
+        .events td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .events th {
+            background-color: #003366;
+            color: white;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            margin-bottom: 10px;
+            padding: 15px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            background-color: #001f3f;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #003366;
+        }
+
+        footer {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .projects, .team {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                font-size: 1em;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>RoboMasters</h1>
+        <p>University of Texas at Arlington</p>
+    </header>
+
+    <nav>
+        <a href="#about">About Us</a>
+        <a href="#projects">Projects</a>
+        <a href="#team">Team</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+
+<body>
+
+    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/lrPoLDeFsfg" 
+        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+        clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScZOEs0lNhZe8lWEAlBsi32dwWqPr9Kl1fe3JRUkP89NfA46Q/viewform" 
+           style="margin-top: 20px; display: inline-block; padding: 15px 30px; background-color: #001f3f; color: white; 
+           text-decoration: none; font-size: 1.5em; border-radius: 8px; text-align: center;">
+           Join Now
+        </a>
+    </div>
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>Welcome to RoboMasters, the robotics competition team at the University of Texas at Arlington. We are a group of students passionate about robotics, engineering, and innovation. Our mission is to design, build, and program cutting-edge robots to compete in national and international competitions, pushing the boundaries of what’s possible in robotics.</p>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>Our Projects</h2>
+        <div class="carousel">
+            <img src="https://via.placeholder.com/400x300" alt="Project 1">
+            <img src="https://via.placeholder.com/400x300" alt="Project 2">
+            <img src="https://via.placeholder.com/400x300" alt="Project 3">
+        </div>
+    </section>
+
+    <section id="projects" class="team">
+        <h2>Meet the Executive Officers</h2>
+	</section>
+<section id="projects" class="team">
+        <div class="team-member">
+            <img src="https://i.postimg.cc/hPtjj5h5/image1-1.jpg/300x300" alt="image1-1"/>
+	<h3>Steven Jheng</h3>
+            <p>President</p>
+        </div>
+   <div class="team-member">
+            <img src="https://i.postimg.cc/593yfV9z/image3.jpg/300x300" alt="image3"/>
+            <h3>Joseph Lee</h3>
+            <p>Vice President</p>
+        </div>
+        <div class="team-member">
+            <img src="https://i.postimg.cc/HsvL79ys/image2.jpg/300x300" alt="image2"/>
+            <h3>Alejandra</h3>
+            <p>Secretary</p>
+</div>
+        <div class="team-member">
+            <img src="https://i.postimg.cc/13g30VG0/image0-3.jpg/300x300" alt="image2"/>
+            <h3>Michael Asemota</h3>
+            <p>Vice Secretary</p>
+        </div>
+   <div class="team-member">
+            <img src="https://via.placeholder.com/300x300" alt="Team Member 2">
+            <h3>Anthony</h3>
+            <p>Treasurer</p>
+        </div>
+   <div class="team-member">
+            <img src="https://via.placeholder.com/300x300" alt="Team Member 2">
+            <h3>Iggy</h3>
+            <p>Marketing Manager</p>
+        </div>
+    </section>
+
+    <section id="events" class="events">
+        <h2>Upcoming Events</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Event</th>
+            </tr>
+            <tr>
+                <td>Sept 15, 2024</td>
+                <td>Regional Robotics Competition</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form class="contact-form" action="#" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 RoboMasters - University of Texas at Arlington. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
